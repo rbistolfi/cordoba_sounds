@@ -1,0 +1,46 @@
+
+body, html {
+    background-color: #EDECEC;
+}
+
+.navbar {
+    background-color: #4CAF50;
+    border: none;
+    margin-bottom: 0;
+}
+
+.navbar .navbar-brand, .navbar .navbar-nav > li > a {
+    color: white;
+}
+
+main, footer {
+    width: 960px;
+    margin: 40px auto;
+}
+
+.glyphicon-10x {
+    font-size: 30em;
+}
+
+label em {
+    color: #999;
+    font-weight: 300;
+}
+
+.intro {
+    margin: 40px 0;
+}
+
+#map { 
+    height: 300px;
+    border-bottom: 2px solid rgba(162, 201, 164, 1);
+}
+
+button[type=submit] {
+    margin: 50px 0;
+}
+
+footer {
+    text-align: right;
+}
+
