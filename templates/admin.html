@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="intro">
+    <h1>Reportes</h1>
+</div>
+<section>
+    <table id="reports" class="table table-stripped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dirección</th>
+                <th>Ciudad</th>
+                <th>Causa</th>
+                <th>Severidad</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+    
+    var setupTable = function () {
+        var data = $.getJSON("/", function (response) {
+            var tbody = $("#reports tbody");
+            for (var i=0; i < response.reports.length; i++) {
+                var r = response.reports[i];
+                var row = "<tr><td><a href='/static/detail.html#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+"</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
+                tbody.append(row);
+            }
+        });
+    };
+
+    setupTable();
+    setupMap();
+</script>
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="intro">
+    <h1>Reporte de Ruidos</h1>
+</div>
+<form>
+    <div class="form-group">
+        <label for="street">Dirección <em>(Ejemplo: Han Solo 648)</em></label>
+        <input type="text" id="address" name="address" class="form-control input-lg" placeholder="Calle número">
+    </div>
+
+    <div class="form-group">
+        <label for="neighborhood">Barrio o Localidad <em>(Opcional)</em></label>
+        <input type="text" id="neighborhood" name="neighborhood"
+        class="form-control input-lg" placeholder="Barrio o Localidad">
+    </div>
+
+    <div class="form-group">
+        <label for="city">Ciudad</label>
+        <input type="text" id="city" name="city" class="form-control input-lg" placeholder="Ciudad">
+    </div>
+
+    <div class="form-group">
+        <label for="province">Provincia</label>
+        <input type="text" id="province" name="province" class="form-control input-lg" placeholder="Provincia">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Nombre y Apellido</label>
+        <input type="text" id="name" class="form-control input-lg" name="name">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" name="email" class="form-control input-lg" id="email">
+    </div>
+
+    <div class="form-group">
+        <label for="telephone">Teléfono</label>
+        <input type="text" id="telephone" class="form-control input-lg" name="telephone">
+    </div>
+
+    <div class="form-group">
+        <label for="noise_type">Tipo de Ruido</label>
+        <select id="noise_type" class="form-control input-lg" name="noise_type">
+            <option></option>
+            <option value="industry">Industrial</option>
+            <option value="activities">Ocio y actividades recreativas</option>
+            <option value="commerce">Actividades comerciales</option>
+            <option value="people">Vecinos</option>
+            <option value="traffic">Tráfico y medios de transporte</option>
+            <option value="work">Obras</option>
+            <option value="other">No lo sé / Otro</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="severity">Severidad</label>
+        <div class="radio">
+            <label class="checkbox-inline"><input type="radio" value="1" name="severity" id="severity"> 1</label>
+            <label class="checkbox-inline"><input type="radio" value="2" name="severity" id="severity"> 2</label>
+            <label class="checkbox-inline"><input type="radio" value="3" name="severity" id="severity"> 3 </label>
+            <label class="checkbox-inline"><input type="radio" value="4" name="severity" id="severity"> 4</label>
+            <label class="checkbox-inline"><input type="radio" value="5" name="severity" id="severity"> 5</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comentario <em>(Información adicional o detalles sobre el tipo de ruido y su severidad)</em></label>
+        <textarea id="comment" class="form-control input-lg" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="sound">
+            <span class="glyphicon glyphicon-volume-up"></span> Grabación del ruido<em>(Opcional)</em>
+        </label>
+        <input type="file" id="sound" name="sound" class="btn btn-default">
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg">
+        <span class="glyphicon glyphicon-triangle-right"></span>  Enviar
+    </button>
+</form>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+
+    var setupAddressInput = function () {
+        var inputTimeout;
+        var input = $("input#address");
+        input.on("keyup", function (event) {
+            if (inputTimeout) {
+                clearTimeout(inputTimeout);
+            }
+            inputTimeout = setTimeout(function () {
+                queryNominatim();
+                clearTimeout(inputTimeout);           
+            }, 500); 
+        });
+    };
+
+
+    var setupCityInput = function () {
+        var cityTimeout;
+        $("input#city").on("change", function () {
+            if (cityTimeout) {
+                clearTimeout(cityTimeout);
+            }
+            cityTimeout = setTimeout(function () {
+                queryNominatim();
+            }, 500);
+        });
+    };
+
+   
+    var setupSubmit = function () {
+        $("button[type=submit]").on("click", function (event) {
+            event.preventDefault();
+            var $button = $(this);
+
+            if ($button.hasClass("disabled")) {
+                return;
+            }
+
+            postData.address = $("#address").val();
+            postData.city = $("#city").val();
+            postData.province = $("#province").val();
+            postData.name = $("#name").val();
+            postData.email = $("#email").val();
+            postData.telephone = $("#telephone").val();
+            postData.noise_type = $("#noise_type").val();
+            postData.severity = $("#severity").val();
+            postData.comment = $("#comment").val();
+
+
+            var getSoundData = function () {
+                var p = new Promise(function (resolve, reject) {
+                    var sound = $("#sound").get(0).files[0];
+                    console.log(sound);
+                    if (sound) {
+                        var reader = new FileReader();
+                        reader.readAsDataURL(sound);
+                        reader.onloadend = function () {
+                            resolve(reader.result); 
+                        }
+                    }
+                    else {
+                        resolve(null);
+                    }
+                });
+                return p
+            };
+
+
+            var sendRequest = function () {
+                $button.addClass("disabled");
+                $.ajax({
+                    contentType: "application/json",
+                    data: JSON.stringify(postData),
+                    dataType: "json",
+                    type: "POST",
+                    url: "/",
+                });
+            };
+
+
+            var getLatLon = function () {
+                var p = new Promise(function (resolve, reject) {
+                    if (!postData.position) {
+                        queryNominatim().then(function () {
+                            resolve(postData.position);
+                        });
+                    }
+                    else {
+                        resolve(postData.position);
+                    }
+                });
+                return p;
+            };
+
+            var soundPromise = getSoundData();
+            var latLonPromise = getLatLon();
+
+            Promise.all([soundPromise, latLonPromise]).then(function (results) {
+                var soundData = results[0];
+                var positionData = results[1];
+
+                console.log(soundData);
+                console.log(positionData);
+
+                postData.sound = soundData;
+                postData.position = positionData;
+                sendRequest();
+            });
+        }); 
+    };
+
+
+    setupMap();
+    setupAddressInput();
+    setupCityInput();
+    setupSubmit();
+</script>
+{% endblock scripts %}
