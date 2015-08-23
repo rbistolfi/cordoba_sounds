@@ -16,7 +16,9 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
-                    <a class="navbar-brand" href="{{ url_for('reports.new_report') }}">UNC</a>
+                    <a class="navbar-brand" href="{{ url_for('reports.new_report') }}">
+                        <span class="glyphicon glyphicon-stats"></span> Observatorio de Ruido
+                    </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -41,7 +43,17 @@
         </main>
 
         <footer>
-            <img src="http://www.psi.unc.edu.ar/logo-unc-200x60" alt="Universidad Nacional de Córdoba" width="200" height="60">
+            <ul class="list-inline">
+                <li>
+                    <img src="{{ url_for('static', filename='img/unc.jpg') }}" alt="Universidad Nacional de Córdoba" width="200" height="60">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='img/cial.jpg') }}" alt="CIAL" width="200" height="60">
+                </li>
+                <li>
+                    <img src="{{ url_for('static', filename='img/fono.jpg') }}" alt="Fono" width="200" height="60">
+                </li>
+            </ul>
         </footer>
 
         {% block scripts %}
