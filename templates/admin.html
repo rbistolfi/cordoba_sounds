@@ -1,0 +1,71 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="intro">
+    <h1>Reportes</h1>
+</div>
+<section>
+    <table id="reports" class="table table-stripped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dirección</th>
+                <th>Ciudad</th>
+                <th>Causa</th>
+                <th>Severidad</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+    INITIAL_ZOOM = 12;
+    INITIAL_POSITION = [-31.419288124288343, -64.1714859008789];
+    setupMap();
+
+    var sizes = [998,854,710,666,622,578,534,490,446,402,358,314,270,226,142,75,54,25];
+
+    var setupTable = function () {
+        var data = $.getJSON("/", function (response) {
+            var tbody = $("#reports tbody");
+            for (var i=0; i < response.reports.length; i++) {
+                var r = response.reports[i];
+                var row = "<tr><td><a href='{{ url_for('reports.detail') }}#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+"</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
+                tbody.append(row);
+                drawHeatMapNode(r);
+            }
+        });
+    };
+
+
+    var circles = [];
+    var drawHeatMapNode = function (node) {
+        var currentZoom = map.getZoom();
+        var circleSize = sizes[currentZoom - 1];
+        var c = L.circle(node.position, circleSize, {
+            color: "transparent",
+            fillColor: "#f03",
+            fillOpacity: 0.30
+        });
+        circles.push(c);
+        c.addTo(map);
+    };
+
+
+    map.on("zoomend", function (e) {
+        var currentZoom = e.target.getZoom();
+        var newRadius = sizes[currentZoom - 1];
+        for (var i=0; i < circles.length; i++) {
+            var c = circles[i];
+            c.setRadius(newRadius);
+        }
+    });
+
+    setupTable();
+
+</script>
+{% endblock %}

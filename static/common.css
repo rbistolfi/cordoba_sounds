@@ -41,6 +41,7 @@ button[type=submit] {
 }
 
 footer {
+    margin-top: 80px;
     text-align: right;
 }
 

@@ -1,0 +1,50 @@
+{% extends "base.html" %} 
+{% block content %}
+<div class="intro">
+    <h1>Reporte </h1>
+</div>
+<table id="detail-table" class="table table-stripped">
+    <tbody>
+    </tbody>
+</table>
+
+<a class="btn btn-primary" href="{{ url_for('reports.admin') }}">
+    <span class="glyphicon glyphicon-triangle-left"></span> Volver
+</a>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script>
+
+    setupMap();
+
+    var setupDetailTable = function () {
+        var id = window.location.hash;
+        url = "/" + id.replace("#", "") + "/";
+        $.getJSON(url, function (response) {
+            var r = response.report;
+            setMarker(r.position[0], r.position[1]);
+            setMapCenter(response.report.position[0], response.report.position[1]);
+
+            $(".intro h1").append(r.id);
+
+            var tbody = $("#detail-table tbody");
+            tbody.append("<tr><th>Dirección</th><td>"+r.address+"</td></tr>");
+            tbody.append("<tr><th>Ciudad</th><td>"+r.city+"</td></tr>");
+            tbody.append("<tr><th>Provincia</th><td>"+r.province+"</td></tr>");
+            tbody.append("<tr><th>Latitud</th><td>"+r.position[0]+"</td></tr>");
+            tbody.append("<tr><th>Longitud</th><td>"+r.position[1]+"</td></tr>");
+            tbody.append("<tr><th>Causa</th><td>"+r.noise_type+"</td></tr>");
+            tbody.append("<tr><th>Severidad</th><td>"+r.severity+"</td></tr>");
+            tbody.append("<tr><th>Reportado por</th><td>"+r.name+"</td></tr>");
+            tbody.append("<tr><th>Email</th><td>"+r.email+"</td></tr>");
+            tbody.append("<tr><th>Teléfono</th><td>"+r.telephone+"</td></tr>");
+            if (r.sound) {
+                tbody.append("<tr><th>Muestra</th><td>"+"<audio controls src='"+r.sound+"'></td></tr>");
+            }
+        });
+    };
+    
+    setupDetailTable();
+</script>
+{% endblock scripts %}
