@@ -1,9 +1,10 @@
 var INITIAL_POSITION = [-31.4167753,-63.61836007]
+var INITIAL_ZOOM = 10;
 
 var map, marker, postData={};
 
 var setupMap = function () {
-    map = L.map('map').setView(INITIAL_POSITION, 10);            
+    map = L.map('map').setView(INITIAL_POSITION, INITIAL_ZOOM);            
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, '
             +' <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, '
