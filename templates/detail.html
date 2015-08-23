@@ -1,4 +1,4 @@
-{% extends "base.html "%} 
+{% extends "base.html" %} 
 {% block content %}
 <div class="intro">
     <h1>Reporte </h1>
@@ -8,20 +8,20 @@
     </tbody>
 </table>
 
-<a class="btn btn-primary" href="/static/admin.html">
+<a class="btn btn-primary" href="{{ url_for('reports.admin') }}">
     <span class="glyphicon glyphicon-triangle-left"></span> Volver
 </a>
 {% endblock %}
 {% block scripts %}
-{{ block super() }}
+{{ super() }}
 <script>
+
+    setupMap();
 
     var setupDetailTable = function () {
         var id = window.location.hash;
-        console.log(id);
         url = "/" + id.replace("#", "") + "/";
         $.getJSON(url, function (response) {
-            console.log(response.report);        
             var r = response.report;
             setMarker(r.position[0], r.position[1]);
             setMapCenter(response.report.position[0], response.report.position[1]);
@@ -45,7 +45,6 @@
         });
     };
     
-    setupMap();
     setupDetailTable();
 </script>
 {% endblock scripts %}

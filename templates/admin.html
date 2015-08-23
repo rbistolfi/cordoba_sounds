@@ -34,7 +34,7 @@
             var tbody = $("#reports tbody");
             for (var i=0; i < response.reports.length; i++) {
                 var r = response.reports[i];
-                var row = "<tr><td><a href='/static/detail.html#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+"</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
+                var row = "<tr><td><a href='{{ url_for('reports.detail') }}#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+"</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
                 tbody.append(row);
                 drawHeatMapNode(r);
             }
