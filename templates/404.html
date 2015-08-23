@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block map %}{% endblock %}
+{% block content %}
+<h1>Página no encontrada</h1>
+
+<p>Es posible que algunas URLs hayan cambiado durante el desarrollo del sitio</p>
+
+<p>Quizás le interese:</p>
+
+<ul>
+    <li>
+        <a href="{{ url_for('reports.new_report') }}">
+            Formulario para crear un nuevo reporte
+        </a>
+    </li>
+    <li>
+        <a href="{{ url_for('reports.admin') }}">
+            Listado de reportes existentes
+        </a>
+    </li>
+</ul>
+{% endblock %}
