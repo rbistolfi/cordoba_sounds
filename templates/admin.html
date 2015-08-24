@@ -25,24 +25,41 @@
 <script>
     INITIAL_ZOOM = 12;
     INITIAL_POSITION = [-31.419288124288343, -64.1714859008789];
-    setupMap();
-
+    var circles = [];
     var sizes = [998,854,710,666,622,578,534,490,446,402,358,314,270,226,142,75,54,25];
 
-    var setupTable = function () {
+
+    setupMap();
+
+
+    var setupData = function () {
         var data = $.getJSON("/", function (response) {
-            var tbody = $("#reports tbody");
             for (var i=0; i < response.reports.length; i++) {
                 var r = response.reports[i];
-                var row = "<tr><td><a href='{{ url_for('reports.detail') }}#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+"</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
-                tbody.append(row);
                 drawHeatMapNode(r);
+                setupTableRow(r);
             }
         });
     };
 
 
-    var circles = [];
+    var setupTableRow = function (r) {
+        var tbody = $("#reports tbody");
+        var row = "<tr class='record' id='node"+r.id+"'><td><a href='{{ url_for('reports.detail') }}#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+
+            "</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
+        tbody.append(row);
+        tbody.on("mouseover", "tr.record#node"+r.id, function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            r.circle.setStyle({color: "blue"});
+        }).on("mouseout", "tr.record#node"+r.id, function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            r.circle.setStyle({color: "transparent"});
+        });
+    };
+
+
     var drawHeatMapNode = function (node) {
         var currentZoom = map.getZoom();
         var circleSize = sizes[currentZoom - 1];
@@ -53,6 +70,7 @@
         });
         circles.push(c);
         c.addTo(map);
+        node.circle = c;
     };
 
 
@@ -65,7 +83,7 @@
         }
     });
 
-    setupTable();
+    setupData();
 
 </script>
 {% endblock %}
