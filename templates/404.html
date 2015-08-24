@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block map %}{% endblock %}
 {% block content %}
-<h1>Página no encontrada</h1>
+<h1 class="page-header">Página no encontrada</h1>
 
 <p>Es posible que algunas URLs hayan cambiado durante el desarrollo del sitio</p>
 
@@ -19,4 +19,56 @@
         </a>
     </li>
 </ul>
+
+<h2 style="margin-top:60px">Actividad Reciente</h2>
+<p>A continuación hay un listado de los últimos eventos relacionados con el desarrollo del sitio.
+Puede obtener más datos <a href="https://github.com/rbistolfi/cordoba_sounds">visitando la página
+del proyecto en GitHub</a>.</p>
+
+<ul class="media-list" style="margin-top:40px">
+</ul>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script>
+    var ghApi = "https://api.github.com/repos/rbistolfi/cordoba_sounds/events?per_page=10";   
+    $.getJSON(ghApi, function addItem(data) {
+        console.log(data);
+        for (var i=0; i < data.length; i++) {
+            var item = data[i];
+            if (item.type === "PushEvent") {
+                var li = $("<li>", {class: "media", style:"margin-bottom:30px"});
+                var left = $("<div>", {class: "media-left"});
+                var img = $("<img>", {class: "media-object", src: item.actor.avatar_url, title: item.actor.login, width:40, height:40});
+                var right = $("<div>", {class: "media-body"});
+                var bodyTitle = $("<h4 class='media-heading'>Commit</h4>");
+                var bodyContent = item.payload.commits[item.payload.commits.length - 1].message;
+                li.append(left);
+                li.append(right);
+                left.append(img);
+                right.append(bodyTitle);
+                right.append(bodyContent);
+                $("ul.media-list").append(li);
+            }
+            else if (item.type === "IssuesEvent") {
+                var li = $("<li>", {class: "media", style:"margin-bottom:30px"});
+                var left = $("<div>", {class: "media-left"});
+                var img = $("<img>", {class: "media-object", src: item.actor.avatar_url, title: item.actor.login, width: 40, height: 40});
+                var right = $("<div>", {class: "media-body"});
+                var labelClass = (item.payload.issue.state === "open") ? "success" : "danger";
+                var label = "<span class='label label-" + labelClass + "'>" +item.payload.issue.state + "</span>";
+                var bodyTitle = $("<h4 class='media-heading'>Issue: "+item.payload.issue.title+" <small>"+label+"</small></h4>");
+                var bodyContent = item.payload.issue.body;
+                li.append(left);
+                li.append(right);
+                left.append(img);
+                right.append(bodyTitle);
+                right.append(bodyContent);
+                $("ul.media-list").append(li);
+            }
+        }
+    });
+</script>
 {% endblock %}
