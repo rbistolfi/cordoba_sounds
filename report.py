@@ -8,6 +8,17 @@ from position import PositionMixin
 from serializable import SerializableMixin
 
 
+NOISE_TYPE_TO_STR = {
+    "industry": "Industria",
+    "activities": "Ocio y actividades recreativas",
+    "commerce": "Actividades comerciales",
+    "people": "Vecinos",
+    "traffic": "Tráfico y medios de transporte",
+    "work": "Obras",
+    "other": "No lo sé / Otro"
+}
+
+
 class Report(db.Document, PositionMixin, SerializableMixin):
     """A user submitted report"""
 
@@ -23,3 +34,12 @@ class Report(db.Document, PositionMixin, SerializableMixin):
     comment = db.StringField(max_length=500)
     sound = db.StringField();
 
+    def as_dict(self):
+        """Report instance as dictionary.
+
+        Overloads SerializableMixin.as_dict() for including noise_type_s, which
+        is the noise_type as a human readable string.
+        """
+        d = super().as_dict()
+        d["noise_type_s"] = NOISE_TYPE_TO_STR.get(self.noise_type)
+        return d
