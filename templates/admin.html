@@ -45,8 +45,9 @@
 
     var setupTableRow = function (r) {
         var tbody = $("#reports tbody");
-        var row = "<tr class='record' id='node"+r.id+"'><td><a href='{{ url_for('reports.detail') }}#"+r.id+"'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+
-            "</td><td>"+r.noise_type+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
+        var row = "<tr class='record' id='node"+r.id+"'><td><a href='{{ url_for('reports.detail') }}#"+r.id+
+            "'>"+r.id+"</a></td><td>"+r.address+"</td><td>"+r.city+
+            "</td><td>"+r.noise_type_s+"</td><td>"+r.severity+"</td><td>"+r.email+"</td></tr>";
         tbody.append(row);
         tbody.on("mouseover", "tr.record#node"+r.id, function (e) {
             e.stopPropagation();
