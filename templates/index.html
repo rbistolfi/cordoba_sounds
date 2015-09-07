@@ -46,12 +46,12 @@
 
     <div>
         <label for="severity">Grado de Molestia</label>
-        <div class="radio">
-            <label class="checkbox-inline"><input type="radio" value="1" name="severity" id="severity"> Poco Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="2" name="severity" id="severity"> Algo Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="3" name="severity" id="severity"> Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="4" name="severity" id="severity"> Muy Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="5" name="severity" id="severity"> Insoportable</label>
+        <div class="radio" id="severity">
+            <label class="checkbox-inline"><input type="radio" value="1" name="severity"> Poco Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="2" name="severity"> Algo Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="3" name="severity"> Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="4" name="severity"> Muy Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="5" name="severity"> Insoportable</label>
         </div>
     </div>
 
@@ -108,7 +108,7 @@
             postData.email = $("#email").val();
             postData.telephone = $("#telephone").val();
             postData.noise_type = $("#noise_type").val();
-            postData.severity = $("#severity").val();
+            postData.severity = $("#severity input:radio:checked").val();
             postData.comment = $("#comment").val();
 
 
