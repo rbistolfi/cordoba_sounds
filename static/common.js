@@ -25,7 +25,7 @@ var queryNominatim = function () {
     // Setup query
     var street = houseNumber + " " + street;
     var neighborhood = $("#neighborhood").val();
-    var city = $("#city").val() || "Córdoba";
+    var city = "Córdoba";
     var country = "Argentina";
 
     // Send to OSM
