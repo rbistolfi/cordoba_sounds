@@ -16,16 +16,6 @@
     </div>
 
     <div class="form-group">
-        <label for="city">Ciudad</label>
-        <input type="text" id="city" name="city" class="form-control input-lg" placeholder="Ciudad">
-    </div>
-
-    <div class="form-group">
-        <label for="province">Provincia</label>
-        <input type="text" id="province" name="province" class="form-control input-lg" placeholder="Provincia">
-    </div>
-
-    <div class="form-group">
         <label for="name">Nombre y Apellido</label>
         <input type="text" id="name" class="form-control input-lg" name="name">
     </div>
@@ -55,13 +45,13 @@
     </div>
 
     <div>
-        <label for="severity">Severidad</label>
-        <div class="radio">
-            <label class="checkbox-inline"><input type="radio" value="1" name="severity" id="severity"> 1</label>
-            <label class="checkbox-inline"><input type="radio" value="2" name="severity" id="severity"> 2</label>
-            <label class="checkbox-inline"><input type="radio" value="3" name="severity" id="severity"> 3 </label>
-            <label class="checkbox-inline"><input type="radio" value="4" name="severity" id="severity"> 4</label>
-            <label class="checkbox-inline"><input type="radio" value="5" name="severity" id="severity"> 5</label>
+        <label for="severity">Grado de Molestia</label>
+        <div class="radio" id="severity">
+            <label class="checkbox-inline"><input type="radio" value="1" name="severity"> Poco Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="2" name="severity"> Algo Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="3" name="severity"> Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="4" name="severity"> Muy Molesto</label>
+            <label class="checkbox-inline"><input type="radio" value="5" name="severity"> Insoportable</label>
         </div>
     </div>
 
@@ -102,19 +92,6 @@
     };
 
 
-    var setupCityInput = function () {
-        var cityTimeout;
-        $("input#city").on("change", function () {
-            if (cityTimeout) {
-                clearTimeout(cityTimeout);
-            }
-            cityTimeout = setTimeout(function () {
-                queryNominatim();
-            }, 500);
-        });
-    };
-
-   
     var setupSubmit = function () {
         $("button[type=submit]").on("click", function (event) {
             event.preventDefault();
@@ -125,13 +102,13 @@
             }
 
             postData.address = $("#address").val();
-            postData.city = $("#city").val();
-            postData.province = $("#province").val();
+            postData.city = "Córdoba";
+            postData.province = "Córdoba";
             postData.name = $("#name").val();
             postData.email = $("#email").val();
             postData.telephone = $("#telephone").val();
             postData.noise_type = $("#noise_type").val();
-            postData.severity = $("#severity").val();
+            postData.severity = $("#severity input:radio:checked").val();
             postData.comment = $("#comment").val();
 
 
@@ -200,7 +177,6 @@
 
     setupMap();
     setupAddressInput();
-    setupCityInput();
     setupSubmit();
 </script>
 {% endblock scripts %}
