@@ -36,6 +36,10 @@ label em {
     border-bottom: 2px solid rgba(162, 201, 164, 1);
 }
 
+#map.anonMap {
+    height: 100vh;
+}
+
 button[type=submit] {
     margin: 50px 0;
 }
