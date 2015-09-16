@@ -45,7 +45,7 @@ class AnonListView(MethodView):
     """Similar to ListView but without personal data"""
 
     def get(self):
-        fields = "position", "severity", "noise_type", "noise_type_s"
+        fields = "position", "severity", "noise_type"
         reports = Report.objects.only(*fields).all()
         response = {
             "reports": [r.as_dict() for r in reports]
