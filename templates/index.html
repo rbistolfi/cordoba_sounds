@@ -1,0 +1,56 @@
+{% extends "base.html" %} 
+
+{% block map %}
+    <div id="map" class="anonMap"></div>
+{% endblock map %}
+
+{% block content %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    INITIAL_ZOOM = 12;
+    INITIAL_POSITION = [-31.419288124288343, -64.1714859008789];
+    var circles = [];
+    var sizes = [998,854,710,666,622,578,534,490,446,402,358,314,270,226,142,75,54,25];
+
+
+    setupMap();
+
+
+    var setupData = function () {
+        var data = $.getJSON(API_BASE_URL + "anon", function (response) {
+            for (var i=0; i < response.reports.length; i++) {
+                var r = response.reports[i];
+                drawHeatMapNode(r);
+            }
+        });
+    };
+
+    var drawHeatMapNode = function (node) {
+        var currentZoom = map.getZoom();
+        var circleSize = sizes[currentZoom - 1];
+        var c = L.circle(node.position, circleSize, {
+            color: "transparent",
+            fillColor: "#f03",
+            fillOpacity: 0.30
+        });
+        circles.push(c);
+        c.addTo(map);
+        node.circle = c;
+    };
+
+    map.on("zoomend", function (e) {
+        var currentZoom = e.target.getZoom();
+        var newRadius = sizes[currentZoom - 1];
+        for (var i=0; i < circles.length; i++) {
+            var c = circles[i];
+            c.setRadius(newRadius);
+        }
+    });
+
+    setupData();
+
+</script>
+{% endblock %}
