@@ -62,9 +62,10 @@ class DetailView(MethodView):
 
 
 reports = Blueprint("reports", __name__, template_folder="templates")
-reports.add_url_rule("/", view_func=ListView.as_view("report_list"))
-reports.add_url_rule("/anon", view_func=AnonListView.as_view("anon_report_list"))
-reports.add_url_rule("/<id>/", view_func=DetailView.as_view("report_detail"))
+reports.add_url_rule("/api/report", view_func=ListView.as_view("report_list"))
+reports.add_url_rule("/api/report/anon", view_func=AnonListView.as_view("anon_report_list"))
+reports.add_url_rule("/api/report/<id>/", view_func=DetailView.as_view("report_detail"))
 reports.add_url_rule("/new", view_func=TemplateView.as_view("new_report", template_name="index.html"))
+reports.add_url_rule("/", view_func=TemplateView.as_view("detail", template_name="index.html"))
 reports.add_url_rule("/admin", view_func=TemplateView.as_view("admin", template_name="admin.html"))
 reports.add_url_rule("/detail", view_func=TemplateView.as_view("detail", template_name="detail.html"))
