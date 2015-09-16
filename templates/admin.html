@@ -33,7 +33,7 @@
 
 
     var setupData = function () {
-        var data = $.getJSON("/", function (response) {
+        var data = $.getJSON(API_BASE_URL, function (response) {
             for (var i=0; i < response.reports.length; i++) {
                 var r = response.reports[i];
                 drawHeatMapNode(r);

@@ -1,4 +1,5 @@
-var INITIAL_POSITION = [-31.4167753,-63.61836007]
+var API_BASE_URL = "/api/report/";
+var INITIAL_POSITION = [-31.4167753,-63.61836007];
 var INITIAL_ZOOM = 10;
 
 var map, marker, postData={};
