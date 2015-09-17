@@ -4,13 +4,14 @@ body, html {
 }
 
 .navbar {
-    background-color: #4CAF50;
+    background-color: white;
     border: none;
+    border-bottom: 1px solid #ccc;
     margin-bottom: 0;
 }
 
 .navbar .navbar-brand, .navbar .navbar-nav > li > a {
-    color: white;
+    color: #4CAF50;
 }
 
 main, footer {
