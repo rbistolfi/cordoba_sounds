@@ -38,7 +38,8 @@ label em {
 }
 
 #map.anonMap {
-    height: 65vh;
+    height: 55vh;
+    min-height: 350px;
 }
 
 button[type=submit] {
