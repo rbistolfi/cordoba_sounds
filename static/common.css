@@ -6,12 +6,13 @@ body, html {
 .navbar {
     background-color: white;
     border: none;
+    border-top: 3px solid #006868;
     border-bottom: 1px solid #ccc;
     margin-bottom: 0;
 }
 
 .navbar .navbar-brand, .navbar .navbar-nav > li > a {
-    color: #4CAF50;
+    color: #006868;
 }
 
 main, footer {
@@ -49,11 +50,14 @@ button[type=submit] {
 footer {
     margin-top: 80px;
     text-align: right;
+    background: #006868;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .landing-row .glyphicon {
     font-size: 50px;
-    color: #4CAF50;
+    color: #006868;
 }
 
 .landing-row h5 {
