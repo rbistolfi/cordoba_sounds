@@ -37,7 +37,7 @@ label em {
 }
 
 #map.anonMap {
-    height: 100vh;
+    height: 85vh;
 }
 
 button[type=submit] {
