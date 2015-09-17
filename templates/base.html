@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>{% block title %}Ruidos de Córdoba{% endblock %}</title>
-    {% block styles %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}"></link>
-    {% endblock %}
+        <title>{% block title %}Ruidos de Córdoba{% endblock %}</title>
+        {% block styles %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}"></link>
+        {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                     </button>
-                    <a class="navbar-brand" href="{{ url_for('reports.new_report') }}">
+                    <a class="navbar-brand" href="{{ url_for('reports.index') }}">
                         <span class="glyphicon glyphicon-stats"></span> Observatorio de Ruido
                     </a>
                 </div>
@@ -26,6 +27,8 @@
                     <ul class="nav navbar-nav">
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ url_for('reports.index') }}">Inicio</a></li>
+                        <li><a href="{{ url_for('reports.new_report') }}">Denunciar</a></li>
                         <li><a href="{{ url_for('reports.admin') }}">Login</a></li>
                     </ul>
                     </div>
