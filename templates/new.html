@@ -4,68 +4,75 @@
     <h1>Reporte de Ruidos</h1>
 </div>
 <form>
-    <div class="form-group">
-        <label for="street">Dirección <em>(Ejemplo: Han Solo 648)</em></label>
-        <input type="text" id="address" name="address" class="form-control input-lg" placeholder="Calle número">
-    </div>
+    <fieldset>
+        <legend>Datos del Ruido</legend>
 
-    <div class="form-group">
-        <label for="neighborhood">Barrio o Localidad <em>(Opcional)</em></label>
-        <input type="text" id="neighborhood" name="neighborhood"
-        class="form-control input-lg" placeholder="Barrio o Localidad">
-    </div>
-
-    <div class="form-group">
-        <label for="name">Nombre y Apellido</label>
-        <input type="text" id="name" class="form-control input-lg" name="name">
-    </div>
-
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" class="form-control input-lg" id="email">
-    </div>
-
-    <div class="form-group">
-        <label for="telephone">Teléfono</label>
-        <input type="text" id="telephone" class="form-control input-lg" name="telephone">
-    </div>
-
-    <div class="form-group">
-        <label for="noise_type">Tipo de Ruido</label>
-        <select id="noise_type" class="form-control input-lg" name="noise_type">
-            <option></option>
-            <option value="industry">Industrial</option>
-            <option value="activities">Ocio y actividades recreativas</option>
-            <option value="commerce">Actividades comerciales</option>
-            <option value="people">Vecinos</option>
-            <option value="traffic">Tráfico y medios de transporte</option>
-            <option value="work">Obras</option>
-            <option value="other">No lo sé / Otro</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="severity">Grado de Molestia</label>
-        <div class="radio" id="severity">
-            <label class="checkbox-inline"><input type="radio" value="1" name="severity"> Poco Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="2" name="severity"> Algo Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="3" name="severity"> Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="4" name="severity"> Muy Molesto</label>
-            <label class="checkbox-inline"><input type="radio" value="5" name="severity"> Insoportable</label>
+        <div class="form-group">
+            <label for="street">Dirección del Orígen del Ruido<em>(Ejemplo: Han Solo 648)</em></label>
+            <input type="text" id="address" name="address" class="form-control input-lg" placeholder="Calle número">
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="comment">Comentario <em>(Información adicional o detalles sobre el tipo de ruido y su severidad)</em></label>
-        <textarea id="comment" class="form-control input-lg" rows="3"></textarea>
-    </div>
+        <div class="form-group">
+            <label for="neighborhood">Barrio o Localidad <em>(Opcional)</em></label>
+            <input type="text" id="neighborhood" name="neighborhood"
+            class="form-control input-lg" placeholder="Barrio o Localidad">
+        </div>
 
-    <div class="form-group">
-        <label for="sound">
-            <span class="glyphicon glyphicon-volume-up"></span> Grabación del ruido<em>(Opcional)</em>
-        </label>
-        <input type="file" id="sound" name="sound" class="btn btn-default">
-    </div>
+        <div class="form-group">
+            <label for="noise_type">Tipo de Ruido</label>
+            <select id="noise_type" class="form-control input-lg" name="noise_type">
+                <option></option>
+                <option value="industry">Industrial</option>
+                <option value="activities">Ocio y actividades recreativas</option>
+                <option value="commerce">Actividades comerciales</option>
+                <option value="people">Vecinos</option>
+                <option value="traffic">Tráfico y medios de transporte</option>
+                <option value="work">Obras</option>
+                <option value="other">No lo sé / Otro</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="severity">Grado de Molestia</label>
+            <div class="radio" id="severity">
+                <label class="checkbox-inline"><input type="radio" value="1" name="severity"> Poco Molesto</label>
+                <label class="checkbox-inline"><input type="radio" value="2" name="severity"> Algo Molesto</label>
+                <label class="checkbox-inline"><input type="radio" value="3" name="severity"> Molesto</label>
+                <label class="checkbox-inline"><input type="radio" value="4" name="severity"> Muy Molesto</label>
+                <label class="checkbox-inline"><input type="radio" value="5" name="severity"> Insoportable</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Comentario <em>(Información adicional o detalles sobre el tipo de ruido y su severidad)</em></label>
+            <textarea id="comment" class="form-control input-lg" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="sound">
+                <span class="glyphicon glyphicon-volume-up"></span> Grabación del ruido<em>(Opcional)</em>
+            </label>
+            <input type="file" id="sound" name="sound" class="btn btn-default">
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Datos Personales</legend>
+
+        <div class="form-group">
+            <label for="name">Nombre y Apellido</label>
+            <input type="text" id="name" class="form-control input-lg" name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control input-lg" id="email">
+        </div>
+
+        <div class="form-group">
+            <label for="telephone">Teléfono <em>(Opcional)</em></label>
+            <input type="text" id="telephone" class="form-control input-lg" name="telephone">
+        </div>
+    </fieldset>
 
     <button type="submit" class="btn btn-success btn-lg">
         <span class="glyphicon glyphicon-triangle-right"></span>  Enviar
