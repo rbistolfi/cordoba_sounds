@@ -63,3 +63,11 @@ footer {
 .landing-row h5 {
     font-size: 22px;
 }
+
+fieldset#personal_data {
+    margin-top: 40px;
+}
+
+legend {
+    margin-bottom: 30px;
+}
