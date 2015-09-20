@@ -20,7 +20,7 @@
 
     var setupDetailTable = function () {
         var id = window.location.hash;
-        url = "/" + id.replace("#", "") + "/";
+        url = API_BASE_URL + "/" + id.replace("#", "") + "/";
         $.getJSON(url, function (response) {
             var r = response.report;
             setMarker(r.position[0], r.position[1]);
@@ -30,6 +30,7 @@
 
             var tbody = $("#detail-table tbody");
             tbody.append("<tr><th>Dirección</th><td>"+r.address+"</td></tr>");
+            tbody.append("<tr><th>Entre calles</th><td>"+r.between_streets+"</td></tr>");
             tbody.append("<tr><th>Ciudad</th><td>"+r.city+"</td></tr>");
             tbody.append("<tr><th>Provincia</th><td>"+r.province+"</td></tr>");
             tbody.append("<tr><th>Latitud</th><td>"+r.position[0]+"</td></tr>");

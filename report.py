@@ -27,6 +27,7 @@ class Report(db.Document, PositionMixin, SerializableMixin):
     email = db.EmailField()
     telephone = db.StringField(max_length=255)
     address = db.StringField(max_length=255)
+    between_streets = db.StringField(max_length=255)
     city = db.StringField(max_length=255)
     province = db.StringField(max_length=255)
     noise_type = db.StringField(max_length=255)
