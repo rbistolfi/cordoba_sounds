@@ -20,7 +20,7 @@
 
     var setupDetailTable = function () {
         var id = window.location.hash;
-        url = "/" + id.replace("#", "") + "/";
+        url = API_BASE_URL + "/" + id.replace("#", "") + "/";
         $.getJSON(url, function (response) {
             var r = response.report;
             setMarker(r.position[0], r.position[1]);
