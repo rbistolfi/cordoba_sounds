@@ -92,6 +92,16 @@
 {{ super() }}
 <script>
 
+    var setupMapInput = function () {
+        /* Allow positioning with double click */
+        map.on("dblclick", function (e) {
+            postData.position = e.latlng;
+            setMarker(e.latlng[0], e.latlng[1]);
+            setMapCenter(e.latlng[0], e.latlng[1]);
+        });
+    };
+
+
     var setupAddressInput = function () {
         var inputTimeout;
         var input = $("input#address");
@@ -191,6 +201,7 @@
 
 
     setupMap();
+    setupMapInput();
     setupAddressInput();
     setupSubmit();
 </script>
