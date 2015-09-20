@@ -69,5 +69,9 @@ fieldset#personal_data {
 }
 
 legend {
+    margin-bottom: 10px;
+}
+
+legend legend + p {
     margin-bottom: 30px;
 }
