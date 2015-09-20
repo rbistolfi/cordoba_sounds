@@ -95,7 +95,7 @@
     var setupMapInput = function () {
         /* Allow positioning with double click */
         map.on("dblclick", function (e) {
-            postData.position = e.latlng;
+            postData.position = [e.latlng.lat, e.latlng.lng];
             setMarker(e.latlng.lat, e.latlng.lng);
             setMapCenter(e.latlng.lat, e.latlng.lng);
         });
