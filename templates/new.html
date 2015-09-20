@@ -10,13 +10,17 @@
 
         <div class="form-group">
             <label for="street">Dirección del Orígen del Ruido<em>(Ejemplo: Han Solo 648)</em></label>
-            <input type="text" id="address" name="address" class="form-control input-lg" placeholder="Calle número">
+            <input type="text" id="address" name="address" class="form-control input-lg" placeholder="Han Solo 648">
+        </div>
+
+        <div class="form-group">
+            <label for="between_streets">Entre Calles<em>(Opcional)</em></label>
+            <input type="text" id="between_streets" name="between_streets" class="form-control input-lg" placeholder="Belgrano y Moreno">
         </div>
 
         <div class="form-group">
             <label for="neighborhood">Barrio o Localidad <em>(Opcional)</em></label>
-            <input type="text" id="neighborhood" name="neighborhood"
-            class="form-control input-lg" placeholder="Barrio o Localidad">
+            <input type="text" id="neighborhood" name="neighborhood" class="form-control input-lg" placeholder="Barrio Don Bosco">
         </div>
 
         <div class="form-group">
@@ -82,9 +86,9 @@
 </form>
 
 <div class="conditions alert alert-info">
-    <strong>Confidencialidad</strong>
-    Todos los datos personales introducidos en el presente formulario no seran
-    publicados bajo ninguna circunstancia ni dados a conocer a terceros
+    <strong>Confidencialidad: </strong>
+    Todos los datos personales introducidos en el presente formulario no serán
+    publicados bajo ninguna circunstancia ni dados a conocer a terceros.
 </div>
 {% endblock %}
 
@@ -127,6 +131,7 @@
             }
 
             postData.address = $("#address").val();
+            postData.between_streets = $("#between_streets").val();
             postData.city = "Córdoba";
             postData.province = "Córdoba";
             postData.name = $("#name").val();
