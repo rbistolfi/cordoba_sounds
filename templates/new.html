@@ -96,8 +96,8 @@
         /* Allow positioning with double click */
         map.on("dblclick", function (e) {
             postData.position = e.latlng;
-            setMarker(e.latlng[0], e.latlng[1]);
-            setMapCenter(e.latlng[0], e.latlng[1]);
+            setMarker(e.latlng.lat, e.latlng.lng);
+            setMapCenter(e.latlng.lat, e.latlng.lng);
         });
     };
 
