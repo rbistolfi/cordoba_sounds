@@ -15,6 +15,10 @@ body, html {
     color: #006868;
 }
 
+.navbar-brand {
+    font-size: 20px;
+}
+
 main, footer {
     width: 960px;
     margin: 40px auto;
