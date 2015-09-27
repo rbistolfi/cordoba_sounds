@@ -15,7 +15,11 @@ body, html {
     color: #006868;
 }
 
-main, footer {
+.navbar-brand {
+    font-size: 20px;
+}
+
+main {
     width: 960px;
     margin: 40px auto;
 }
@@ -49,10 +53,8 @@ button[type=submit] {
 
 footer {
     margin-top: 80px;
-    text-align: right;
     background: #006868;
     padding: 30px;
-    border-radius: 10px;
 }
 
 .landing-row .glyphicon {
