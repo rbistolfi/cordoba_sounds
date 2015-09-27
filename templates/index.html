@@ -69,6 +69,14 @@
             fillColor: "#f03",
             fillOpacity: 0.30
         });
+        var popupContent = [
+            "<strong>" + node.address + "</strong>",
+            "Tipo de ruido: " + node.noise_type_s,
+            "Grado de molestia: " + node.severity,
+            "Latitud: " + node.position[0],
+            "Longitud: " + node.position[1],
+        ].join("<br>");
+        c.bindPopup(popupContent);
         circles.push(c);
         c.addTo(map);
         node.circle = c;
