@@ -45,18 +45,8 @@
             {% endblock %}
         </main>
 
-        <footer>
-            <ul class="list-inline">
-                <li>
-                    <img src="{{ url_for('static', filename='img/unc.jpg') }}" alt="Universidad Nacional de Córdoba" width="200" height="60">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', filename='img/cial.jpg') }}" alt="CIAL" width="200" height="60">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', filename='img/fono.jpg') }}" alt="Fono" width="200" height="60">
-                </li>
-            </ul>
+        <footer class="text-center">
+            <img src="{{ url_for('static', filename='img/banner.jpg') }}" alt="logos">
         </footer>
 
         {% block scripts %}
