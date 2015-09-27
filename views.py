@@ -67,5 +67,6 @@ reports.add_url_rule("/api/report/<id>/", view_func=DetailView.as_view("report_d
 reports.add_url_rule("/api/report", view_func=ListView.as_view("report_list"))
 reports.add_url_rule("/", view_func=TemplateView.as_view("index", template_name="index.html"))
 reports.add_url_rule("/new", view_func=TemplateView.as_view("new_report", template_name="new.html"))
+reports.add_url_rule("/report_created", view_func=TemplateView.as_view("report_created", template_name="report_created.html"))
 reports.add_url_rule("/admin", view_func=TemplateView.as_view("admin", template_name="admin.html"))
 reports.add_url_rule("/detail", view_func=TemplateView.as_view("detail", template_name="detail.html"))

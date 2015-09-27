@@ -176,6 +176,13 @@
                     dataType: "json",
                     type: "POST",
                     url: API_BASE_URL,
+                    success: function () {
+                        window.location = "{{ url_for('reports.report_created') }}";
+                    },
+                    error: function () {
+                        $("form").append("<div class='alert alert-danger'>Hubo un problema enviando su reporte," + 
+                            " por favor póngase en contacto con el administrador del sitio");
+                    },
                 });
             };
 
