@@ -18,7 +18,7 @@
                         <span class="sr-only">Toggle navigation</span>
                     </button>
                     <a class="navbar-brand" href="{{ url_for('reports.index') }}">
-                        <span class="glyphicon glyphicon-stats"></span> Observatorio de Ruido
+                        <span class="glyphicon glyphicon-stats"></span> Observatorio de Ruido Córdoba
                     </a>
                 </div>
 
@@ -28,7 +28,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ url_for('reports.index') }}">Inicio</a></li>
-                        <li><a href="{{ url_for('reports.new_report') }}">Denunciar</a></li>
+                        <li><a href="{{ url_for('reports.new_report') }}">Reportar</a></li>
                         <li><a href="{{ url_for('reports.admin') }}">Login</a></li>
                     </ul>
                     </div>
@@ -45,18 +45,8 @@
             {% endblock %}
         </main>
 
-        <footer>
-            <ul class="list-inline">
-                <li>
-                    <img src="{{ url_for('static', filename='img/unc.jpg') }}" alt="Universidad Nacional de Córdoba" width="200" height="60">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', filename='img/cial.jpg') }}" alt="CIAL" width="200" height="60">
-                </li>
-                <li>
-                    <img src="{{ url_for('static', filename='img/fono.jpg') }}" alt="Fono" width="200" height="60">
-                </li>
-            </ul>
+        <footer class="text-center">
+            <img src="{{ url_for('static', filename='img/banner.jpg') }}" alt="logos">
         </footer>
 
         {% block scripts %}
