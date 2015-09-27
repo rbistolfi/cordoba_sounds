@@ -55,6 +55,15 @@ footer {
     margin-top: 80px;
     background: #006868;
     padding: 30px;
+    color: #EEEEEE;
+}
+
+footer img {
+    margin-bottom: 20px;
+}
+
+footer a {
+    color: cyan;
 }
 
 .landing-row .glyphicon {
