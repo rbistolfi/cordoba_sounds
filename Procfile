@@ -1,1 +1,1 @@
-web: python3.4 app.py
+web: gunicorn app:app --preload --max-requests 1200
