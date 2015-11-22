@@ -21,9 +21,11 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
-def register_blueprints():
-    import views #NOQA
-    app.register_blueprint(views.reports)
+def register_blueprints(app):
+    import report_views #NOQA
+    import user_views #NOQA
+    app.register_blueprint(report_views.reports)
+    app.register_blueprint(user_views.users)
 
 
 def setup_user():
@@ -49,6 +51,6 @@ def setup_user():
 
 if __name__ == "__main__":
     port = os.environ.get("PORT", 5000)
-    register_blueprints()
+    register_blueprints(app)
     user_datastore, security = setup_user()
     app.run(debug=True, port=int(port), host="0.0.0.0")

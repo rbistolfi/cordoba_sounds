@@ -23,7 +23,7 @@
 {% block scripts %}
 <script>
 
-    var userManagementUrl = "{{ url_for('reports.user_list') }}";
+    var userManagementUrl = "{{ url_for('users.user_list') }}";
 
     var setupTableRow = function (u) {
         var tbody = $("#users tbody");

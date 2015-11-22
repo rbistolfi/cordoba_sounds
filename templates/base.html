@@ -39,7 +39,7 @@
                                     <li><a href="{{ url_for('reports.admin') }}">Reportes</a></li>
                                 {% endif %}
                                 {% if current_user.has_role("admin") %}
-                                    <li><a href="{{ url_for('reports.user') }}">Usuarios</a></li>
+                                    <li><a href="{{ url_for('users.user') }}">Usuarios</a></li>
                                 {% endif %}
                                     <li class="divider" role="separator"></li>
                                     <li><a href="{{ url_for('security.logout') }}">Salir</a></li>
