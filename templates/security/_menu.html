@@ -1,0 +1,13 @@
+{% if security.registerable or security.recoverable or security.confirmable %}
+<div class="login_links">
+  {% if security.registerable %}
+  <a href="{{ url_for_security('register') }}{% if 'next' in request.args %}?next={{ request.args.next|urlencode }}{% endif %}">Registrarse</a>
+  {% endif %}
+  {% if security.recoverable %}
+  | <a href="{{ url_for_security('forgot_password') }}">Olvidé mi contraseña</a>
+  {% endif %}
+  {% if security.confirmable %}
+  | <a href="{{ url_for_security('send_confirmation') }}">Confirmar cuenta</a>
+  {% endif %}
+</div>
+{% endif %}

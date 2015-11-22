@@ -1,0 +1,3 @@
+Por favor siga el siguiente enlace para verificar su cuenta:
+
+{{ confirmation_link }}

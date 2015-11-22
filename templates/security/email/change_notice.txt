@@ -1,0 +1,5 @@
+Su contraseña ha sido modificada.
+{% if security.recoverable %}
+Si usted no pidio este cambio, siga el siguiente link para cambiar su contraseña ahora.
+{{ url_for_security('forgot_password', _external=True) }}
+{% endif %}

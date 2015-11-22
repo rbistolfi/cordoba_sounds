@@ -1,0 +1,7 @@
+Bienvenido {{ user.email }}!
+
+{% if security.confirmable %}
+Puede confirmar su cuenta siguiendo el enlace a continuacion:
+
+{{ confirmation_link }}
+{% endif %}
