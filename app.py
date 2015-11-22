@@ -7,37 +7,12 @@ from flask.ext.mongoengine import MongoEngine
 from flask.ext.security import Security, MongoEngineUserDatastore
 from flask_mail import Mail
 
+import settings
+
 
 app = Flask(__name__)
-
-
-# Mongo settings
-app.config["MONGODB_SETTINGS"] = {
-    "HOST": os.environ.get("MONGOLAB_URI", None),
-    "DB": "cbasounds"
-}
-
-# App secret
-app.config["SECRET_KEY"] = "2po89gvuhpfvnhp98r5phnf"
-
-# Mail settings
-app.config['MAIL_SERVER'] = 'pop.faudi.unc.edu.ar'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_SSL'] = False
-app.config['MAIL_USERNAME'] = 'youremail@institution.edu'
-app.config['MAIL_PASSWORD'] = 'changeme'
+app.config.from_object(settings)
 mail = Mail(app)
-
-# Security settings
-app.config['SECURITY_EMAIL_SENDER'] = 'youremail@institution.edu'
-app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
-app.config['SECURITY_PASSWORD_SALT'] = 'your salt'
-app.config['SECURITY_CONFIRMABLE'] = True
-app.config['SECURITY_REGISTERABLE'] = True
-app.config['SECURITY_RECOVERABLE'] = True
-app.config['SECURITY_CHANGEABLE'] = True
-
-
 db = MongoEngine(app)
 
 
