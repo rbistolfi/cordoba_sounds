@@ -4,12 +4,13 @@
 """User model"""
 
 
-from app import db
-from serializable import SerializableMixin
 from flask.ext.security import (
     RoleMixin,
     UserMixin,
 )
+
+from cba_sounds.model import db
+from cba_sounds.model.serializable import SerializableMixin
 
 
 class Role(db.Document, RoleMixin, SerializableMixin):
@@ -29,3 +30,6 @@ class User(db.Document, UserMixin, SerializableMixin):
         d["is_admin"] = self.has_role("admin")
         d["is_staff"] = self.has_role("staff")
         return d
+
+
+

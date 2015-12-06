@@ -2,7 +2,7 @@
 
 
 import json
-from position import PositionMixin
+from cba_sounds.model.position import PositionMixin
 
 
 class SerializableMixin:

@@ -1,13 +1,13 @@
 # coding: utf-8
 
 
-from app import db
+from cba_sounds.model import db
 
 
 class PositionMixin:
 
     meta = {
-        "abstract": True        
+        "abstract": True
     }
-    
+
     position = db.PointField()

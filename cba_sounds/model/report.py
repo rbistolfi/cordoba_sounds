@@ -3,9 +3,9 @@
 
 import datetime
 
-from app import db
-from position import PositionMixin
-from serializable import SerializableMixin
+from cba_sounds.model import db
+from cba_sounds.model.position import PositionMixin
+from cba_sounds.model.serializable import SerializableMixin
 
 
 NOISE_TYPE_TO_STR = {
