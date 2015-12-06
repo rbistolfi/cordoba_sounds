@@ -19,6 +19,13 @@ def admin_required(func):
     return roles_accepted("admin")(func)
 
 
+def register_blueprints(app):
+    from .report import reports #NOQA
+    from .user import users     #NOQA
+    app.register_blueprint(reports)
+    app.register_blueprint(users)
+
+
 class TemplateView(View):
 
     def __init__(self, template_name):

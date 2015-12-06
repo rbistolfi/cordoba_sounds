@@ -8,10 +8,9 @@ from flask import Blueprint, request, render_template, url_for
 from flask.views import MethodView
 from flask_security.decorators import login_required, roles_accepted
 
-from response import JsonResponse
-from user import User, Role
-
-from view_util import admin_required, staff_required, TemplateView
+from cba_sounds.model.user import User, Role
+from cba_sounds.views.response import JsonResponse
+from cba_sounds.views.util import admin_required, staff_required, TemplateView
 
 
 class UserManagerView(MethodView):

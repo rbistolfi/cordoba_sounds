@@ -4,10 +4,9 @@ from flask import Blueprint, request, render_template, url_for
 from flask.views import MethodView, View
 from flask_security.decorators import login_required, roles_accepted
 
-from response import JsonResponse
-from report import Report
-
-from view_util import admin_required, staff_required, TemplateView
+from cba_sounds.model.report import Report
+from cba_sounds.views.response import JsonResponse
+from cba_sounds.views.util import admin_required, staff_required, TemplateView
 
 
 class ListView(MethodView):
