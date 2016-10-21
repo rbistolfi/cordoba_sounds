@@ -1,0 +1,5 @@
+Bienvenido {{ user.email }}!
+
+Puede ingresar al sitio siguiendo el enlace a continuacion:
+
+{{ login_link }}

@@ -1,0 +1,4 @@
+<p>Su contraseña ha sido modificada.</p>
+{% if security.recoverable %}
+<p>Si usted no ha pedido este cambio, <a href="{{ url_for_security('forgot_password', _external=True) }}">siga este link para cambiar su contraseña ahora</a>.</p>
+{% endif %}

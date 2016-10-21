@@ -1,0 +1,3 @@
+Siga el siguiente enlace para cambiar su contraseña:
+
+{{ reset_link }}

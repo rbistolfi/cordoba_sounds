@@ -1,0 +1,76 @@
+{% extends "base.html" %} 
+{% block map %}{% endblock %}
+{% block content %}
+<div class="intro">
+    <h1>Usuarios</h1>
+</div>
+<section>
+    <table id="users" class="table table-stripped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Active</th>
+                <th>Staff</th>
+                <th>Admin</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+
+    var userManagementUrl = "{{ url_for('users.user_list') }}";
+
+    var setupTableRow = function (u) {
+        var tbody = $("#users tbody");
+        var row = $("<tr />", {"class": "user", "id": "user"+u.id});
+        var td1 = $("<td>" + u.id + "</td>");
+        var td2 = $("<td>" + u.email + "</td>");
+        var td3 = $("<td />");
+        var td4 = $("<td />");
+        var td5 = $("<td />");
+        var i1 = $("<input />", {"type": "checkbox", "checked": u.active, "disabled": true});
+        var i2 = $("<input />", {"type": "checkbox", "checked": u.is_staff});
+        var i3 = $("<input />", {"type": "checkbox", "checked": u.is_admin, "disabled": true});
+        td3.append(i1);
+        td4.append(i2);
+        td5.append(i3);
+        row.append(td1);
+        row.append(td2);
+        row.append(td3);
+        row.append(td4);
+        row.append(td5);
+        tbody.append(row);
+
+        i2.on("change", function () {
+            var postData = {user_id: u.id, is_staff: this.checked};
+            $.ajax({
+                contentType: "application/json",
+                data: JSON.stringify(postData),
+                dataType: "json",
+                type: "POST",
+                url: userManagementUrl,
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function () {
+                    $("section:first").append("<div class='alert alert-danger'>Hubo un problema guardando sus datos," + 
+                        " por favor póngase en contacto con el administrador del sitio");
+                },
+            });
+        });
+    };
+
+    $.getJSON(userManagementUrl, function (response) {
+        for (var i=0; i < response.users.length; i++) {
+            var u = response.users[i];
+            setupTableRow(u);
+        }
+    });
+
+</script>
+{% endblock %}

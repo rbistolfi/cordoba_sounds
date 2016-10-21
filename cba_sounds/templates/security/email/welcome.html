@@ -1,0 +1,7 @@
+<p>Bienvenido {{ user.email }}!</p>
+
+{% if security.confirmable %}
+<p>Puede confirmar su cuenta siguiendo el enlace a continuacion:</p>
+
+<p><a href="{{ confirmation_link }}">Confirmar mi cuenta</a></p>
+{% endif %}

@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='common.css') }}"></link>
         {% endblock %}
     </head>
-    <body>
+    <body class="{% block page_class %}{% endblock %}">
         <nav class="navbar">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,7 +29,25 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ url_for('reports.index') }}">Inicio</a></li>
                         <li><a href="{{ url_for('reports.new_report') }}">Reportar</a></li>
-                        <li><a href="{{ url_for('reports.admin') }}">Login</a></li>
+                        {% if current_user and current_user.is_authenticated %}
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" aria-haspopup="true" role="button" data-toggle="dropdown" href="#">
+                                  {{current_user.email}} <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                {% if current_user.has_role("admin") or current_user.has_role("staff") %}
+                                    <li><a href="{{ url_for('reports.admin') }}">Reportes</a></li>
+                                {% endif %}
+                                {% if current_user.has_role("admin") %}
+                                    <li><a href="{{ url_for('users.user') }}">Usuarios</a></li>
+                                {% endif %}
+                                    <li class="divider" role="separator"></li>
+                                    <li><a href="{{ url_for('security.logout') }}">Salir</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ url_for('security.login') }}">Ingresar</a></li>
+                        {% endif %}
                     </ul>
                     </div>
                 </div>
@@ -41,19 +59,23 @@
             {% endblock %}
         </section>
         <main>
+            {% include "security/_messages.html" %}
             {% block content %}
             {% endblock %}
         </main>
 
+        {% block footer %}
         <footer class="text-center">
             <img src="{{ url_for('static', filename='img/banner.jpg') }}" alt="logos">
             <p><span class="glyphicon glyphicon-copyright-mark"></span> 2015 - Observatorio del Ruido Córdoba</p>
             <p>Desarrollado por <a href="https://github.com/rbistolfi/cordoba_sounds">rbistolfi</a></p>
         </footer>
+        {% endblock %}
 
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         {% block scripts %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="{{ url_for('static', filename='common.js') }}"></script>
         {% endblock scripts %}
     </body>

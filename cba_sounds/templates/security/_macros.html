@@ -1,0 +1,32 @@
+{% macro render_field_with_errors(field) %}
+{% if field.type == 'StringField' or field.type == 'PasswordField' %}
+<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+    {% if field.type != 'HiddenField' %}
+    <label for="{{ field.id }}" class="control-label">{{ field.label }}</label>
+    {% endif %}
+    {{ field(class_='form-control', **kwargs) }}
+    {% for e in field.errors %}
+    <p class="help-block">{{ e }}</p>
+    {% endfor %}
+</div>
+
+{% elif field.type == 'SubmitField' %}
+<button type="submit" class="btn btn-primary btn-lg">
+    <i class="glyphicon glyphicon-triangle-right"></i> {{ field.label.text }}
+</button>
+
+{% elif field.type == 'BooleanField' %}
+<div class="checkbox {% if field.errors %}has-error{% endif %}">
+    <label for="{{ field.id }}" class="control-label">
+        {{ field(**kwargs) }} {{ field.label.text }}
+    </label>
+    {% for e in field.errors %}
+    <p class="help-block">{{ e }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro render_field(field) %}
+    {{ render_field_with_errors(field) }}
+{% endmacro %}
