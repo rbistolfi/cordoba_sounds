@@ -26,7 +26,7 @@ MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 MAIL_USE_SSL = False
 
 # Security settings
-SECURITY_EMAIL_SENDER = 'youremail@institution.edu'
+SECURITY_EMAIL_SENDER = os.environ.get("MAIL_DEFAULT_SENDER", "youremail@institution.edu")
 SECURITY_PASSWORD_HASH = 'bcrypt'
 SECURITY_PASSWORD_SALT = 'your salt'
 SECURITY_CONFIRMABLE = True
