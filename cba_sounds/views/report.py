@@ -6,7 +6,7 @@ from flask_security.decorators import login_required, roles_accepted
 
 from cba_sounds.model.report import Report
 from cba_sounds.views.response import JsonResponse
-from cba_sounds.views.util import admin_required, staff_required, TemplateView
+from cba_sounds.views.util import admin_required, staff_required, staff_required_for_get, TemplateView
 
 
 class ListView(MethodView):
@@ -60,7 +60,7 @@ reports.add_url_rule("/api/report/anon", view_func=AnonListView.as_view("anon_re
 
 # Staff required, report list and details
 reports.add_url_rule("/api/report/<id>/", view_func=staff_required(DetailView.as_view("report_detail")))
-reports.add_url_rule("/api/report", view_func=staff_required(ListView.as_view("report_list")))
+reports.add_url_rule("/api/report", view_func=ListView.as_view("report_list"))
 reports.add_url_rule("/admin", view_func=staff_required(TemplateView.as_view("admin", template_name="admin.html")))
 reports.add_url_rule("/detail", view_func=staff_required(TemplateView.as_view("detail", template_name="detail.html")))
 

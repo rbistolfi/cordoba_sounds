@@ -14,6 +14,15 @@ def staff_required(func):
     return roles_accepted("admin", "staff")(func)
 
 
+def staff_required_for_get(func):
+    """A view decorator that accepts admin and staff users"""
+    def handler(request, *args, **kwargs):
+        if request.method == "POST":
+            return func(request, *args, **kwargs)
+        return roles_accepted("admin", "staff")(func)(request, *args, **kwargs)
+    return handler
+
+
 def admin_required(func):
     """A view decorator that accepts admin users only"""
     return roles_accepted("admin")(func)
